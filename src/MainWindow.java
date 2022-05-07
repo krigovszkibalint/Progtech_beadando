@@ -2,6 +2,8 @@ import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class MainWindow extends JDialog{
@@ -31,6 +33,13 @@ public class MainWindow extends JDialog{
                 "Tesla Model 3 Performance",
                 "Toyota Celica",
                 "Toyota Celica TS" }));
+        btnLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                LoginForm loginForm = new LoginForm(null);
+            }
+        });
         setVisible(true);
     }
     public static void main(String[] args) {
