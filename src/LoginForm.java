@@ -39,6 +39,7 @@ public class LoginForm extends JDialog {
                             "Sikeres bejelentkezés!",
                             "Bejelentkezés",
                             JOptionPane.INFORMATION_MESSAGE);
+                    MainWindow mainWindow = new MainWindow(null);
                 }
                 // Sikertelen bejelentkezés
                 else {
