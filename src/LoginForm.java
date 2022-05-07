@@ -49,6 +49,12 @@ public class LoginForm extends JDialog {
                 }
             }
         });
+        btnClose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         setVisible(true);
     }
     public User user;
