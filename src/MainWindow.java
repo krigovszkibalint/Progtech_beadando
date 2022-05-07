@@ -40,6 +40,13 @@ public class MainWindow extends JDialog{
                 LoginForm loginForm = new LoginForm(null);
             }
         });
+        btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tfCountProduce.setText("");
+                tfDelayProduce.setText("");
+            }
+        });
         setVisible(true);
     }
     public static void main(String[] args) {
