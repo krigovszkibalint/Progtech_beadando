@@ -21,6 +21,34 @@ public class LoginForm extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+
+        // Bejelentkezés gomb
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = tfUsername.getText();
+                String password = String.valueOf(pfPassword.getPassword());
+
+                user = getAuthenticatedUser(username, password);
+
+                // Sikeres bejelentkezés
+                if (user != null) {
+                    dispose();
+                    JOptionPane.showMessageDialog(LoginForm.this,
+                            "Sikeres bejelentkezés!",
+                            "Bejelentkezés",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+                // Sikertelen bejelentkezés
+                else {
+                    JOptionPane.showMessageDialog(LoginForm.this,
+                            "Felhasználónév vagy jelszó helytelen!",
+                            "Sikertelen bejelentkezés",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         setVisible(true);
     }
     public User user;
@@ -49,7 +77,6 @@ public class LoginForm extends JDialog {
             if (resultSet.next()) {
                 user = new User();
                 user.username = resultSet.getString("username");
-                user.email = resultSet.getString("email");
                 user.password = resultSet.getString("password");
             }
 
@@ -63,5 +90,11 @@ public class LoginForm extends JDialog {
     }
     public static void main(String[] args) {
         LoginForm loginForm = new LoginForm(null);
+        User user = loginForm.user;
+        if (user != null) {
+            System.out.println("Sikeres bejelentkezés: " + user.username);
+        } else {
+            System.out.println("Bejelentkezés megszakítva");
+        }
     }
 }
