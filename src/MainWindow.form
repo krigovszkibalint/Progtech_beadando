@@ -3,12 +3,12 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="501"/>
+      <xy x="20" y="20" width="500" height="556"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="b409d" binding="settingsPanel" layout-manager="GridLayoutManager" row-count="16" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="b409d" binding="settingsPanel" layout-manager="GridLayoutManager" row-count="18" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -32,7 +32,7 @@
           </component>
           <vspacer id="77a73">
             <constraints>
-              <grid row="15" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <component id="43851" class="javax.swing.JLabel">
@@ -120,7 +120,7 @@
           </component>
           <component id="99427" class="javax.swing.JButton" binding="btnLogout">
             <constraints>
-              <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-14013909"/>
@@ -132,7 +132,7 @@
           </component>
           <vspacer id="b9d4b">
             <constraints>
-              <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="15" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <vspacer id="57d6a">
@@ -167,6 +167,23 @@
               <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
+          <component id="7f95" class="javax.swing.JButton" binding="btnListClear">
+            <constraints>
+              <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-14013909"/>
+              <font size="16"/>
+              <foreground color="-2"/>
+              <margin top="5" left="0" bottom="7" right="0"/>
+              <text value="Lista kiürítése"/>
+            </properties>
+          </component>
+          <vspacer id="3c692">
+            <constraints>
+              <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
         </children>
       </grid>
       <grid id="62475" binding="carsProducedPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -177,20 +194,25 @@
         <properties/>
         <border type="etched"/>
         <children>
-          <component id="33b42" class="javax.swing.JList" binding="listCarsProduced">
+          <scrollpane id="40b0" binding="jScrollPane">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties>
-              <background color="-1579028"/>
-              <foreground color="-16777216"/>
-            </properties>
-          </component>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="33b42" class="javax.swing.JList" binding="listCarsProduced">
+                <constraints/>
+                <properties>
+                  <background color="-1579028"/>
+                  <foreground color="-16777216"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
-      <grid id="30933" binding="headerPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="30933" binding="headerPanel" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="5" bottom="10" right="5"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -223,7 +245,17 @@
             <properties>
               <font size="16"/>
               <foreground color="-2"/>
-              <text value="Legyártott autók: 0"/>
+              <text value="Legyártott autók:"/>
+            </properties>
+          </component>
+          <component id="3cda9" class="javax.swing.JLabel" binding="lblProduced">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="16"/>
+              <foreground color="-2"/>
+              <text value="0"/>
             </properties>
           </component>
         </children>
