@@ -23,9 +23,9 @@ A felhasználó bejelentkezés után ki tudja választani a legyártani kívánt
 
 ## Funkcionális terv
 
-![login](login.jpg)
+![login](login.JPG)
 
-![login](main.jpg)
+![main](main.JPG)
 
 ## Fizikai környezet
 
