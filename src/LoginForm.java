@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.logging.Logger;
 
 public class LoginForm extends JDialog {
     private JPanel mainPanel;
@@ -13,6 +14,8 @@ public class LoginForm extends JDialog {
     private JButton btnLogin;
     private JButton btnClose;
 
+    private static final Logger logger = Logger.getLogger(LoginForm.class.getName());
+
     public LoginForm(JFrame parent) {
         super(parent);
         setTitle("Bejelentkezés");
@@ -22,11 +25,11 @@ public class LoginForm extends JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-
         // Bejelentkezés gomb
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                logger.info("Bejelentkezési próbálkozás");
                 String username = tfUsername.getText();
                 String password = String.valueOf(pfPassword.getPassword());
 
@@ -39,7 +42,9 @@ public class LoginForm extends JDialog {
                             "Sikeres bejelentkezés!",
                             "Bejelentkezés",
                             JOptionPane.INFORMATION_MESSAGE);
+                    logger.info("Bejelentkezve");
                     MainWindow mainWindow = new MainWindow(null);
+
                 }
                 // Sikertelen bejelentkezés
                 else {
@@ -47,6 +52,7 @@ public class LoginForm extends JDialog {
                             "Felhasználónév vagy jelszó helytelen!",
                             "Sikertelen bejelentkezés",
                             JOptionPane.ERROR_MESSAGE);
+                    logger.info("Sikertelen bejelentkezés");
                 }
             }
         });

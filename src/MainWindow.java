@@ -4,13 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class MainWindow extends JDialog{
 
-    DefaultListModel<String> model;
+    private static final Logger logger = Logger.getLogger(MainWindow.class.getName());
+
+    // DB kapcsolat
+    final static String DB_URL = "jdbc:mysql://localhost/progtech_beadando";
+    final static String USERNAME = "root";
+    final static String PASSWORD = "";
+
+    static DefaultListModel<String> model;
     int producedCar;
 
     private JPanel mainPanel;
@@ -42,6 +51,8 @@ public class MainWindow extends JDialog{
         listCarsProduced.setModel(model);
         listCarsProduced.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane.setViewportView(listCarsProduced);
+
+
 
         producedCar = 0;
         cbTypeProduce.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
@@ -93,6 +104,20 @@ public class MainWindow extends JDialog{
                             if(factory != null && amount >= 1) {
                                 Car newCar = factory.Make();
                                 model.add(0, producedCar+". "+newCar.Info());
+                                String SQL = "INSERT INTO cars(marka, tipus, ulesek, loero)" + "VALUES(?,?,?,?)";
+
+                                try(Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                                    PreparedStatement pstmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)
+                                ){
+                                    pstmt.setString(1, newCar.GetMake());
+                                    pstmt.setString(2, newCar.GetModel());
+                                    pstmt.setInt(3, newCar.GetSeats());
+                                    pstmt.setInt(4, newCar.GetHorsePower());
+                                    pstmt.executeUpdate();
+                                    logger.info("Autó legyártva!");
+                                } catch (SQLException ex){
+                                    System.out.println(ex.getMessage());
+                                }
 
                                 producedCar++;
                                 lblProduced.setText(Integer.toString(producedCar));
@@ -111,6 +136,15 @@ public class MainWindow extends JDialog{
                 public void actionPerformed(ActionEvent e) {
                     DefaultListModel model = (DefaultListModel) listCarsProduced.getModel();
                     model.removeAllElements();
+                    try {
+                        Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                        Statement stmt = conn.createStatement();
+                        String sql = "TRUNCATE cars";
+                        stmt.executeUpdate(sql);
+                        logger.info("Lista törölve!");
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getMessage());
+                    }
                     lblProduced.setText("0");
                 }
             });
@@ -118,5 +152,57 @@ public class MainWindow extends JDialog{
     }
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow(null);
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM cars";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                Car car = new Car() {
+                    @Override
+                    public String GetMake() {
+                        try {
+                            return rs.getString(1);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    public String GetModel() {
+                        try {
+                            return rs.getString(2);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    public int GetSeats() {
+                        try {
+                            return rs.getInt(3);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        return 0;
+                    }
+
+                    @Override
+                    public int GetHorsePower() {
+                        try {
+                            return rs.getInt(4);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        return 0;
+                    }
+                };
+                model.add(0, car.Info());
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
